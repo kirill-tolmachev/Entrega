@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.MessageImpl;
+using Assets.Scripts.Util;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -22,10 +23,9 @@ namespace Assets.Scripts.Controllers
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (_layerMask == (_layerMask | (1 << other.gameObject.layer)))
+            if (_layerMask.HasLayer(other.gameObject.layer))
             {
                 _destroyables.Add(other.gameObject);
-                _messageBus.Publish(new ShotMissedMessage(other.transform.position)).Forget();
             }
         }
 
@@ -34,6 +34,13 @@ namespace Assets.Scripts.Controllers
             for (int i = _destroyables.Count - 1; i >= 0; i--)
             {
                 var item = _destroyables[i];
+
+                if (item.gameObject.TryGetComponent(out Package package))
+                {
+                    if (!package.FoundTarget)
+                        _messageBus.Publish(new ShotMissedMessage(item.transform.position)).Forget();
+                }
+
                 _destroyables.RemoveAt(i);
                 if (item)
                 {

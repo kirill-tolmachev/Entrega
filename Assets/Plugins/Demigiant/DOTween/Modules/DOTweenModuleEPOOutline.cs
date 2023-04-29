@@ -22,7 +22,7 @@ namespace DG.Tweening
             return tweener;
         }
 
-        public static TweenerCore<Color, Color, ColorOptions> DOFade(this SerializedPass target, string propertyName, float endValue, float duration)
+        public static TweenerCore<Color, Color, ColorOptions> DOFadepriv(this SerializedPass target, string propertyName, float endValue, float duration)
         {
             var tweener = DOTween.ToAlpha(() => target.GetColor(propertyName), x => target.SetColor(propertyName, x), endValue, duration);
             tweener.SetOptions(true).SetTarget(target);

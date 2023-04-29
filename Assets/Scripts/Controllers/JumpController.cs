@@ -16,7 +16,6 @@ namespace Scripts
         [Inject] private IMessageBus _messageBus;
         [Inject] private ObjectLocator _objectLocator;
         [Inject] private JumpSettings _jumpSettings;
-        
 
         private void OnEnable()
         {
@@ -30,7 +29,6 @@ namespace Scripts
 
         public void OnJumpStart(StartJumpingMessage _)
         {
-            Debug.Log("On jump start");
             _isJumping = true;
             _jumpStartTime = Time.time;
             _leftToRight = _objectLocator.PlayerTransform.position.x < 0;
@@ -46,7 +44,6 @@ namespace Scripts
 
             var background = _objectLocator.BackgroundRect;
             var playerRect = _objectLocator.PlayerRect;
-
 
             var (startX, endX, offset) = _leftToRight
                 ? (background.xMin, background.xMax, -playerRect.width / 2f)

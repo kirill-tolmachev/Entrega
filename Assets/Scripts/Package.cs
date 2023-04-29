@@ -10,5 +10,7 @@ namespace Assets.Scripts
     internal class Package : MovableObject
     {
         public float Direction { get; set; }
+
+        public bool FoundTarget { get; set; }
     }
 }
