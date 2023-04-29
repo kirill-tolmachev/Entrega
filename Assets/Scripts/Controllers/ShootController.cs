@@ -29,11 +29,12 @@ namespace Scripts.Controllers
         {
             var playerPosition = _objectLocator.PlayerTransform.position;
             var container = _objectLocator.PackagesContainer;
-            var position = container.InverseTransformPoint(playerPosition);
+            var direction = -Mathf.Sign(_objectLocator.PlayerTransform.position.x);
+            var position = container.InverseTransformPoint(playerPosition) + new Vector3(direction, 0f);
             Debug.Log("Shooting from: " + position);
 
             var package = _instantiator.InstantiatePrefab<Package>(_packagePrefab, position, Quaternion.identity, _objectLocator.PackagesContainer);
-            package.Direction = -Mathf.Sign(_objectLocator.PlayerTransform.position.x);
+            package.Direction = direction;
         }
     }
 }

@@ -23,9 +23,11 @@ namespace Assets.Scripts
             {
                 var item = _destroyables[i];
                 _destroyables.RemoveAt(i);
-                _messageBus.Publish(new ObjectDestroyedMessage(item.transform));
-
-                Destroy(item.gameObject);
+                if (item)
+                {
+                    _messageBus.Publish(new ObjectDestroyedMessage(item.transform));
+                    Destroy(item.gameObject);
+                }
             }
         }
 
