@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Scripts.Infrastructure.Messages;
 using Scripts.MessageImpl;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Assets.Scripts
                 _destroyables.RemoveAt(i);
                 if (item)
                 {
-                    _messageBus.Publish(new ObjectDestroyedMessage(item.transform));
+                    _messageBus.Publish(new ObjectDestroyedMessage(item.transform)).Forget();
                     Destroy(item.gameObject);
                 }
             }

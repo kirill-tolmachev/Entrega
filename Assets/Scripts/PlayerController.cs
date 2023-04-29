@@ -1,3 +1,4 @@
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Scripts.Infrastructure.Messages;
 using Scripts.MessageImpl;
@@ -8,6 +9,8 @@ namespace Scripts
 {
     public class PlayerController : MonoBehaviour
     {
+        private readonly KeyCode[] _jumpKeys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
+
         private bool _grounded = true;
 
         private float _shootCooldown;
@@ -25,7 +28,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (_grounded && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)))
+            if (_grounded && (_jumpKeys.Any(Input.GetKeyDown)))
             {
                 Jump();
             }

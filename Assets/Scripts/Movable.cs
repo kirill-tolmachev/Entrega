@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Scripts.Infrastructure.Messages;
 using Scripts.MessageImpl;
 using UnityEngine;
@@ -16,12 +17,12 @@ namespace Assets.Scripts
 
         public virtual void OnEnable()
         {
-            _messageBus.Publish(new ObjectCreatedMessage(transform));
+            _messageBus.Publish(new ObjectCreatedMessage(transform)).Forget();
         }
 
         public virtual void OnDisable()
         {
-            _messageBus.Publish(new ObjectDestroyedMessage(transform));
+            _messageBus.Publish(new ObjectDestroyedMessage(transform)).Forget();
         }
 
     }

@@ -26,11 +26,15 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            if (Mathf.Approximately(Rotation, _targetRotation))
+            if (Mathf.Abs(Rotation - _targetRotation) < 0.01)
+            {
                 _targetRotation = Random.value * 360f - 180f;
+                Debug.Log("Change target to: " + _targetRotation);
+            }
             
 
             Rotation = Mathf.Lerp(Rotation, _targetRotation, _rotationSpeed * Time.deltaTime);
+            Debug.Log($"Current rotation:{Rotation} (target: {_targetRotation})");
         }
 
     }
