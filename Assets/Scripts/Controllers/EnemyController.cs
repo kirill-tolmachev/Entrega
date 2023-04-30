@@ -191,7 +191,7 @@ namespace Assets.Scripts
         [Inject] private IMessageBus _messageBus;
         [Inject] private DiContainer _container;
 
-        private Dictionary<Enemy, EnemyState> _enemies = new Dictionary<Enemy, EnemyState>();
+        private readonly Dictionary<Enemy, EnemyState> _enemies = new Dictionary<Enemy, EnemyState>();
 
         private void OnEnable()
         {

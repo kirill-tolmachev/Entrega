@@ -15,7 +15,7 @@ namespace Assets.Scripts
     {
         [Inject] private IMessageBus _messageBus;
 
-        public virtual void OnEnable()
+        public virtual void Start()
         {
             _messageBus.Publish(new ObjectCreatedMessage(transform)).Forget();
         }
