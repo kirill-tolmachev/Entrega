@@ -15,6 +15,8 @@ namespace Assets.Scripts.Controllers
     {
         [Inject] private IMessageBus _messageBus;
 
+        private LevelInfo _currentLevel;
+
         private HashSet<Colorizable> _colorizables = new HashSet<Colorizable>();
 
         private void OnEnable()
@@ -37,6 +39,8 @@ namespace Assets.Scripts.Controllers
             if (message.Object.TryGetComponent(out Colorizable colorizable))
             {
                 _colorizables.Add(colorizable);
+                if (_currentLevel != null)
+                    colorizable.SetColor(_currentLevel);
             }
         }
 
@@ -51,13 +55,13 @@ namespace Assets.Scripts.Controllers
 
         private void OnLevelShouldChange(LevelShouldChangeMessage message)
         {
-            var info = message.Level;
+            _currentLevel = message.Level;
 
             foreach (var colorizable in _colorizables)
             {
                 if (colorizable)
                 {
-                    colorizable.SetColor(info);
+                    colorizable.SetColor(_currentLevel);
                 }
             }
         }

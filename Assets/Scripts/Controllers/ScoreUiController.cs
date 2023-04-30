@@ -19,18 +19,18 @@ namespace Assets.Scripts.Controllers
 
         private void OnEnable()
         {
-            _messageBus.Subscribe<LocalScoreChangedMessage>(OnScoreChanged);
+            _messageBus.Subscribe<TotalScoreChangedMessage>(OnScoreChanged);
         }
 
 
         private void OnDisable()
         {
-            _messageBus.Subscribe<LocalScoreChangedMessage>(OnScoreChanged);
+            _messageBus.Subscribe<TotalScoreChangedMessage>(OnScoreChanged);
         }
 
-        private void OnScoreChanged(LocalScoreChangedMessage message)
+        private void OnScoreChanged(TotalScoreChangedMessage message)
         {
-            _scoreText.text = message.LocalScore.ToString(CultureInfo.InvariantCulture);
+            _scoreText.text = message.TotalScore.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

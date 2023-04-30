@@ -9,11 +9,11 @@ namespace Assets.Scripts.MessageImpl
 {
     internal class LocalScoreChangedMessage : IMessage
     {
-        public LocalScoreChangedMessage(int localScore)
+        public LocalScoreChangedMessage(int delta)
         {
-            LocalScore = localScore;
+            Delta = delta;
         }
 
-        public int LocalScore { get; }
+        public int Delta { get; }
     }
 }

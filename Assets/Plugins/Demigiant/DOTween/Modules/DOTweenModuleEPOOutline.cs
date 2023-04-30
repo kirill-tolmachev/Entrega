@@ -18,7 +18,7 @@ namespace DG.Tweening
         public static TweenerCore<float, float, FloatOptions> DOFloat(this SerializedPass target, string propertyName, float endValue, float duration)
         {
             var tweener = DOTween.To(() => target.GetFloat(propertyName), x => target.SetFloat(propertyName, x), endValue, duration);
-            tweener.SetOptions(trulore).SetTarget(target);
+            tweener.SetOptions(true).SetTarget(target);
             return tweener;
         }
 

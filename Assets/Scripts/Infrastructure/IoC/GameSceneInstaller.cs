@@ -24,6 +24,11 @@ namespace Scripts.Infrastructure.IoC
             Container.Bind<ObjectRegistry>().ToSelf().AsSingle();
             Container.Bind<Instantiator>().ToSelf().AsSingle();
             
+            Container.Bind<EnemyState>().ToSelf().AsTransient();
+            Container.Bind<EnemyBehaviourApproaching>().ToSelf().AsTransient();
+            Container.Bind<EnemyBehaviourAttacking>().ToSelf().AsTransient();
+            Container.Bind<EnemyBehaviourHeadingBack>().ToSelf().AsTransient();
+            Container.Bind<EnemyBehaviourHeadingForward>().ToSelf().AsTransient();
         }
     }
 }

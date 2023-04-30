@@ -18,18 +18,17 @@ namespace Assets.Scripts.Controllers
         [Inject] private IMessageBus _messageBus;
 
         private int _requiredScore = 30;
-        private LevelInfo _levelInfo;
 
         private void OnEnable()
         {
             _messageBus.Subscribe<LevelShouldChangeMessage>(OnLevelShouldChange);
-            _messageBus.Subscribe<LocalScoreChangedMessage>(OnScoreChanged);
+            _messageBus.Subscribe<TotalScoreChangedMessage>(OnScoreChanged);
         }
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<LevelShouldChangeMessage>(OnLevelShouldChange);
-            _messageBus.Unsubscribe<LocalScoreChangedMessage>(OnScoreChanged);
+            _messageBus.Unsubscribe<TotalScoreChangedMessage>(OnScoreChanged);
         }
 
         private void OnLevelShouldChange(LevelShouldChangeMessage message)
@@ -38,9 +37,9 @@ namespace Assets.Scripts.Controllers
             _fillTransform.localScale = GetScaleValue(0f);
         }
 
-        private void OnScoreChanged(LocalScoreChangedMessage message)
+        private void OnScoreChanged(TotalScoreChangedMessage message)
         {
-            float scale = message.LocalScore / (float)_requiredScore;
+            float scale = (message.LocalScore / (float)_requiredScore);
             _fillTransform.DOScale(GetScaleValue(scale), 0.1f).SetEase(Ease.OutElastic);
         }
 
