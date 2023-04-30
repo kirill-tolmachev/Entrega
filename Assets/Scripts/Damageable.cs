@@ -22,7 +22,7 @@ namespace Assets.Scripts
         private float _currentHealth;
 
         public float MaxHealth => _health;
-        public float Health => _health;
+        public float Health => _currentHealth;
 
         [SerializeField]
         private LayerMask _collisionLayerMask;

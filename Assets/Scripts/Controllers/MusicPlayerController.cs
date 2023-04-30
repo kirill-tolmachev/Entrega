@@ -21,8 +21,11 @@ namespace Assets.Scripts.Controllers
 
         [Inject] private IMessageBus _messageBus;
 
+        private float _maxVolume;
+
         private void OnEnable()
         {
+            _maxVolume = _audioSource.volume;
             _audioSource.clip = _startupClip;
             _audioSource.Play();
 
@@ -46,7 +49,7 @@ namespace Assets.Scripts.Controllers
 
         private void OnPlay(OnPlayMessage _)
         {
-            _audioSource.DOFade(1f, 0.2f);
+            _audioSource.DOFade(_maxVolume, 0.2f);
         }
 
         void Update()
