@@ -44,7 +44,7 @@ namespace Assets.Scripts
             var y = Mathf.Lerp(pos.y, target, _speed * Time.deltaTime);
 
             Self.transform.position = new Vector3(pos.x, y, pos.z);
-            if (Mathf.Abs(target - y) < 0.001)
+            if (Mathf.Abs(target - y) < 0.01)
                 _finished = true;
         }
 
@@ -86,9 +86,9 @@ namespace Assets.Scripts
     {
         private readonly IMessageBus _messageBus;
 
-        private float _maxDuration = 5f;
+        private readonly float _maxDuration = 5f;
         private float _currentDuration;
-        private float _maxCooldown = 0.8f;
+        private readonly float _maxCooldown = 0.8f;
 
         private float _currentCooldown;
 
@@ -230,6 +230,9 @@ namespace Assets.Scripts
         {
             foreach (var (enemy, enemyState) in _enemies)
             {
+                if (enemy.IsDead)
+                    continue;
+
                 enemyState.Update();
             }
         }

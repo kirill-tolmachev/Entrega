@@ -15,6 +15,9 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.TryGetComponent(out Enemy enemy) && !enemy.IsDead)
+                return;
+
             _destroyables.Add(other.gameObject);
         }
 

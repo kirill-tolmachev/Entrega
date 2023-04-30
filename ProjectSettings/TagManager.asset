@@ -16,8 +16,8 @@ TagManager:
   - Target
   - Player
   - Package
-  - 
-  - 
+  - Enemy
+  - EnemyBullet
   - 
   - 
   - 

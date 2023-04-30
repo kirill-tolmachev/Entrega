@@ -13,7 +13,7 @@ namespace Assets.Scripts
 {
     internal class MovableObject : InGameObject
     {
-        
+        public bool IsMovable { get; set; } = true;
 
     }
 }

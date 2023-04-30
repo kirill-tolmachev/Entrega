@@ -44,6 +44,9 @@ namespace Scripts.Controllers
 
             foreach (var item in _objects)
             {
+                if (!item.IsMovable)
+                    continue;
+
                 var pos = item.transform.localPosition;
                 item.transform.localPosition = new Vector3(pos.x, pos.y + dy, pos.z);
             }

@@ -36,7 +36,7 @@ namespace Assets.Scripts.Controllers
         private void OnStartup(StartupMessage message)
         {
             var levelInfo = _settings.GetInfo(_currentLevel);
-            _messageBus.Publish(new LevelShouldChangeMessage(_currentLevel, levelInfo, _requiredScore)).Forget();
+            _messageBus.Publish(new LevelShouldChangeMessage(_currentLevel, levelInfo, _requiredScore, 1f)).Forget();
         }
 
         private void OnScoreChanged(LocalScoreChangedMessage message)
@@ -56,7 +56,7 @@ namespace Assets.Scripts.Controllers
             var levelInfo = _settings.GetInfo(_currentLevel);
 
             _messageBus.Publish(new TotalScoreChangedMessage(_localScore, _totalScore)).Forget();
-            _messageBus.Publish(new LevelShouldChangeMessage(_currentLevel, levelInfo, _requiredScore)).Forget();
+            _messageBus.Publish(new LevelShouldChangeMessage(_currentLevel, levelInfo, _requiredScore, _currentLevel)).Forget();
         }
 
 

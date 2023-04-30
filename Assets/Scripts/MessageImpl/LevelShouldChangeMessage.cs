@@ -9,16 +9,18 @@ namespace Assets.Scripts.MessageImpl
 {
     internal class LevelShouldChangeMessage : IMessage
     {
-        public LevelShouldChangeMessage(int levelIndex, LevelInfo level, int requiredScore)
+        public LevelShouldChangeMessage(int levelIndex, LevelInfo level, int requiredScore, float enemyFrequency)
         {
             LevelIndex = levelIndex;
             Level = level;
             RequiredScore = requiredScore;
+            EnemyFrequency = enemyFrequency;
         }
 
         public int LevelIndex { get; }
         public LevelInfo Level { get; }
 
         public int RequiredScore { get; }
+        public float EnemyFrequency { get; }
     }
 }

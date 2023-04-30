@@ -35,6 +35,7 @@ namespace Assets.Scripts.Controllers
             var enemy = message.Enemy;
             var bullet = _instantiator.InstantiatePrefabWorldSpace(_bulletPrefab, enemy.transform.position, Quaternion.identity, _bulletParent);
 
+
         }
     }
 }
