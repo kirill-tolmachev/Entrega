@@ -38,5 +38,14 @@ namespace Assets.Scripts
 
             return instance;
         }
+
+        public GameObject InstantiatePrefabWorldSpace(UnityEngine.Object prefab, Vector3 position, Quaternion rotation, Transform parent)
+        {
+            var localPosition = parent.InverseTransformPoint(position);
+            var instance = _container.InstantiatePrefab(prefab, localPosition, rotation, parent);
+            //_messageBus.Publish(new ObjectCreatedMessage(instance.transform)).Forget();
+
+            return instance;
+        }
     }
 }

@@ -11,19 +11,9 @@ using Zenject;
 
 namespace Assets.Scripts
 {
-    internal class MovableObject : MonoBehaviour
+    internal class MovableObject : InGameObject
     {
-        [Inject] private IMessageBus _messageBus;
-
-        public virtual void OnEnable()
-        {
-            _messageBus.Publish(new ObjectCreatedMessage(transform)).Forget();
-        }
-
-        public virtual void OnDisable()
-        {
-            _messageBus.Publish(new ObjectDestroyedMessage(transform)).Forget();
-        }
+        
 
     }
 }

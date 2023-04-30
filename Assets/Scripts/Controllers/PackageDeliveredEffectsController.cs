@@ -13,8 +13,8 @@ namespace Assets.Scripts.Controllers
 {
     internal class PackageDeliveredEffectsController : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem[] _particleSystemsPrefabs;
-        [SerializeField] private IMessageBus _messageBus;
+        [SerializeField] private GameObject[] _particleSystemsPrefabs;
+        [Inject] private IMessageBus _messageBus;
         [SerializeField] private Transform _parent;
 
         [Inject] private Instantiator _instantiator;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.Controllers
             var position = message.Package.transform.position;
             var effect = _particleSystemsPrefabs.PickRandom();
 
-            _instantiator.InstantiatePrefabWorldSpace<ParticleSystem>(effect, position, Quaternion.identity, _parent);
+            _instantiator.InstantiatePrefabWorldSpace(effect, position, Quaternion.identity, _parent);
         }
     }
 }
