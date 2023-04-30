@@ -7,5 +7,7 @@ namespace Assets.Scripts
         [SerializeField] private LayerMask _affectedLayers;
 
         public LayerMask AffectedLayers => _affectedLayers;
+
+        public float Direction { get; set; }
     }
 }

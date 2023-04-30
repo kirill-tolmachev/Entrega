@@ -85,6 +85,7 @@ namespace Assets.Scripts
     internal class EnemyBehaviourAttacking : EnemyBehaviour
     {
         private readonly IMessageBus _messageBus;
+        private readonly ObjectLocator _objectLocator;
 
         private readonly float _maxDuration = 5f;
         private float _currentDuration;
@@ -96,9 +97,10 @@ namespace Assets.Scripts
 
         private bool _finished;
 
-        public EnemyBehaviourAttacking(IMessageBus messageBus)
+        public EnemyBehaviourAttacking(IMessageBus messageBus, ObjectLocator objectLocator)
         {
             _messageBus = messageBus;
+            _objectLocator = objectLocator;
         }
 
         public override void Update()
@@ -117,7 +119,9 @@ namespace Assets.Scripts
             }
 
             _currentCooldown = 0f;
-            _messageBus.Publish(new EnemyShootMessage(Self)).Forget();
+
+            float direction = Mathf.Sign(_objectLocator.PlayerTransform.position.x);
+            _messageBus.Publish(new ShootMessage(false, Self.transform.position, direction)).Forget();
         }
     }
 

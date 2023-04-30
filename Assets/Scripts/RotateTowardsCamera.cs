@@ -22,7 +22,22 @@ namespace Assets.Scripts
 
         [Inject] private CinemachineVirtualCamera _virtualCamera;
 
+        [SerializeField] private bool _rotateOnUpdate;
+
         private void Start()
+        {
+            Rotate();
+        }
+
+        private void Update()
+        {
+            if (!_rotateOnUpdate)
+                return;
+
+            Rotate();
+        }
+
+        private void Rotate()
         {
             var rotation = _virtualCamera.m_Lens.Dutch;
             var deviation = Random.Range(_minDeviation, _maxDeviation);

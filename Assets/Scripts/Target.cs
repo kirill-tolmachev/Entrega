@@ -13,6 +13,7 @@ namespace Scripts
     {
         private bool _isActiveTarget = true;
         [SerializeField] private LayerMask _packageLayerMask;
+        [SerializeField] private LayerMask _playerLayerMask;
         [SerializeField] private float _shrinkDuration;
 
         [Inject] private IMessageBus _messageBus;
@@ -22,21 +23,27 @@ namespace Scripts
             if (!_isActiveTarget)
                 return;
 
-            if (!_packageLayerMask.HasLayer(other.gameObject.layer))
-                return;
+            bool playerCollision = _playerLayerMask.HasLayer(other.gameObject.layer);
+            bool packageCollision = _packageLayerMask.HasLayer(other.gameObject.layer);
 
-            if (!other.TryGetComponent(out Package package))
-            {
+            if (!playerCollision && !packageCollision)
                 return;
+            
+            if (other.TryGetComponent(out Package package))
+            {
+                package.FoundTarget = true;
             }
 
-            package.FoundTarget = true;
             _isActiveTarget = false;
 
             var scale = transform.localScale;
-            transform.DOScale(new Vector3(scale.x, 0f, scale.z), _shrinkDuration);
+            transform.DOScale(new Vector3(scale.x, 0f, scale.z), _shrinkDuration).SetEase(Ease.InOutBounce);
 
-            _messageBus.Publish(new PackageDeliveredMessage(package, this)).Forget();
+            if (packageCollision)
+                _messageBus.Publish(new PackageDeliveredMessage(package, this)).Forget();
+
+            if (playerCollision)
+                _messageBus.Publish(new PlayerTargetCollisionMessage(this)).Forget();
         }
 
     }

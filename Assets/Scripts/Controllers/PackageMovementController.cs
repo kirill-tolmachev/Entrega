@@ -15,7 +15,7 @@ namespace Scripts.Controllers
         [Inject]
         private IMessageBus _messageBus;
 
-        private readonly Dictionary<Package, (Vector3 position, float launchTime)> _packages = new();
+        private readonly Dictionary<Bullet, (Vector3 position, float launchTime)> _packages = new();
 
         private void OnEnable()
         {
@@ -31,26 +31,26 @@ namespace Scripts.Controllers
 
         private void OnObjectCreated(ObjectCreatedMessage message)
         {
-            if (message.Object.TryGetComponent(out Package package))
-                _packages.Add(package, (package.transform.localPosition, Time.time));
+            if (message.Object.TryGetComponent(out Bullet bullet))
+                _packages.Add(bullet, (bullet.transform.localPosition, Time.time));
 
         }
 
         private void OnObjectRemoved(ObjectDestroyedMessage message)
         {
-            if (message.Object.TryGetComponent(out Package package))
+            if (message.Object.TryGetComponent(out Bullet package))
                 _packages.Remove(package);
         }
 
         private void Update()
         {
-            foreach (var (package, (originalPosition, launchTime)) in _packages)
+            foreach (var (direction, (originalPosition, launchTime)) in _packages)
             {
                 var dt = Time.time - launchTime;
-                var position = _packageVelocitySettings.GetPosition(dt) * 10 * package.Direction + originalPosition.x;
+                var position = _packageVelocitySettings.GetPosition(dt) * 10 * direction.Direction + originalPosition.x;
 
-                var pos = package.transform.localPosition;
-                package.transform.localPosition = new Vector3(position, pos.y, pos.z);
+                var pos = direction.transform.localPosition;
+                direction.transform.localPosition = new Vector3(position, pos.y, pos.z);
             }
         }
     }

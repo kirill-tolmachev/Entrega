@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.MessageImpl;
 using Cysharp.Threading.Tasks;
 using Scripts.Infrastructure.Messages;
 using Scripts.MessageImpl;
@@ -15,8 +16,14 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out Enemy enemy) && !enemy.IsDead)
-                return;
+            if (other.TryGetComponent(out Enemy enemy))
+            {
+                if (!enemy.IsDead)
+                    return;
+
+                var damageable = enemy.GetComponent<Damageable>();
+                _messageBus.Publish(new DeathMessage(damageable));
+            }
 
             _destroyables.Add(other.gameObject);
         }

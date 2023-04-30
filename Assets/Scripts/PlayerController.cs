@@ -19,12 +19,8 @@ namespace Scripts
 
         [Inject] private IMessageBus _messageBus;
 
-        // Start is called before the first frame update
-        void Start()
-        {
+        [Inject] private ObjectLocator _objectLocator;
         
-        }
-
         // Update is called once per frame
         void Update()
         {
@@ -54,7 +50,11 @@ namespace Scripts
 
         void Shoot()
         {
-            _messageBus.Publish(new ShootMessage()).Forget();
+
+            var playerPosition = _objectLocator.PlayerTransform.position;
+            var direction = -Mathf.Sign(_objectLocator.PlayerTransform.position.x);
+
+            _messageBus.Publish(new ShootMessage(true, playerPosition, direction)).Forget();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Assets.Scripts.Controllers
         [SerializeField] private Transform _container;
         [SerializeField] private Enemy _enemyPrefab;
 
-        private Dictionary<Enemy, EnemyInfo> _enemies = new Dictionary<Enemy, EnemyInfo>();
+        private readonly Dictionary<Enemy, EnemyInfo> _enemies = new Dictionary<Enemy, EnemyInfo>();
         private float _frequency = 1f;
 
         private float _spawnCooldown;
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            float cooldown = Mathf.Max(1f,10f / _frequency);
+            float cooldown = Mathf.Max(0.2f,10f / _frequency);
             _spawnCooldown += Time.deltaTime;
 
             if (_spawnCooldown < cooldown)

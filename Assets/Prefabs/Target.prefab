@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4795904757104306638
 MonoBehaviour:
@@ -188,7 +188,10 @@ MonoBehaviour:
   _packageLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  _shrinkDuration: 0.5
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _shrinkDuration: 0.1
 --- !u!114 &6984498432622177310
 MonoBehaviour:
   m_ObjectHideFlags: 0

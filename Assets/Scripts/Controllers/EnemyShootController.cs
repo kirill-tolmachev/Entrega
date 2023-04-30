@@ -20,22 +20,22 @@ namespace Assets.Scripts.Controllers
 
         [SerializeField] private GameObject _bulletPrefab;
 
-        private void OnEnable()
-        {
-            _messageBus.Subscribe<EnemyShootMessage>(OnEnemyShoot);
-        }
+        //private void OnEnable()
+        //{
+        //    _messageBus.Subscribe<EnemyShootMessage>(OnEnemyShoot);
+        //}
 
-        private void OnDisable()
-        {
-            _messageBus.Unsubscribe<EnemyShootMessage>(OnEnemyShoot);
-        }
+        //private void OnDisable()
+        //{
+        //    _messageBus.Unsubscribe<EnemyShootMessage>(OnEnemyShoot);
+        //}
 
-        private void OnEnemyShoot(EnemyShootMessage message)
-        {
-            var enemy = message.Enemy;
-            var bullet = _instantiator.InstantiatePrefabWorldSpace(_bulletPrefab, enemy.transform.position, Quaternion.identity, _bulletParent);
+        //private void OnEnemyShoot(EnemyShootMessage message)
+        //{
+        //    var enemy = message.Enemy;
+        //    var bullet = _instantiator.InstantiatePrefabWorldSpace(_bulletPrefab, enemy.transform.position, Quaternion.identity, _bulletParent);
 
 
-        }
+        //}
     }
 }
