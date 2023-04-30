@@ -27,6 +27,7 @@ namespace Assets.Scripts.Controllers
             _messageBus.Unsubscribe<DamageAffectedMessage>(OnDamageAffected);
         }
 
+
         private void OnDamageAffected(DamageAffectedMessage message)
         {
             var position = message.Affector.position;

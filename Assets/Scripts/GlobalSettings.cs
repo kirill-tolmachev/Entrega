@@ -6,10 +6,7 @@ namespace Scripts
     {
         public JumpSettings JumpSettings;
 
-        public float ScrollSpeed => _scrollSpeed;
-
-        [SerializeField, Range(0, 5f)]
-        private float _scrollSpeed;
+        public float ScrollSpeed { get; set; }
 
         public float PlayerSpeed { get; set; }
     }

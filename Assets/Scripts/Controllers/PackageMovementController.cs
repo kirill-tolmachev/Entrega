@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts;
+using Assets.Scripts.MessageImpl;
 using Scripts.Infrastructure.Messages;
 using Scripts.MessageImpl;
 using UnityEngine;
@@ -21,12 +22,21 @@ namespace Scripts.Controllers
         {
             _messageBus.Subscribe<ObjectCreatedMessage>(OnObjectCreated);
             _messageBus.Subscribe<ObjectDestroyedMessage>(OnObjectRemoved);
+            _messageBus.Subscribe<ResetMessage>(OnReset);
         }
+
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<ObjectCreatedMessage>(OnObjectCreated);
             _messageBus.Unsubscribe<ObjectDestroyedMessage>(OnObjectRemoved);
+            _messageBus.Unsubscribe<ResetMessage>(OnReset);
+        }
+
+
+        private void OnReset(ResetMessage obj)
+        {
+            _packages.Clear();
         }
 
         private void OnObjectCreated(ObjectCreatedMessage message)

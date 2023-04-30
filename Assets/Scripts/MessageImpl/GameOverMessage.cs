@@ -10,4 +10,8 @@ namespace Assets.Scripts.MessageImpl
     internal class ResetMessage : IMessage
     {
     }
+
+    internal class OnPlayMessage : IMessage
+    {
+    }
 }

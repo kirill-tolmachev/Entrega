@@ -201,12 +201,19 @@ namespace Assets.Scripts
         {
             _messageBus.Subscribe<ObjectCreatedMessage>(OnObjectCreated);
             _messageBus.Subscribe<ObjectDestroyedMessage>(OnObjectDestroyed);
+            _messageBus.Subscribe<ResetMessage>(OnReset);
         }
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<ObjectCreatedMessage>(OnObjectCreated);
             _messageBus.Unsubscribe<ObjectDestroyedMessage>(OnObjectDestroyed);
+            _messageBus.Unsubscribe<ResetMessage>(OnReset);
+        }
+
+        private void OnReset(ResetMessage _)
+        {
+            _enemies.Clear();
         }
 
         private void OnObjectCreated(ObjectCreatedMessage message)

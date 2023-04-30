@@ -15,6 +15,10 @@ namespace Assets.Scripts
     {
         [Inject] private IMessageBus _messageBus;
 
+        [SerializeField] private bool _deleteOnReset = true;
+
+        public bool DeleteOnReset => _deleteOnReset;
+
         public virtual void Start()
         {
             _messageBus.Publish(new ObjectCreatedMessage(transform)).Forget();

@@ -39,12 +39,21 @@ namespace Assets.Scripts.Controllers
         {
             _messageBus.Subscribe<LevelShouldChangeMessage>(OnLevelChanged);
             _messageBus.Subscribe<ObjectDestroyedMessage>(OnObjectDestroyed);
+            _messageBus.Subscribe<ResetMessage>(OnReset);
         }
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<LevelShouldChangeMessage>(OnLevelChanged);
             _messageBus.Unsubscribe<ObjectDestroyedMessage>(OnObjectDestroyed);
+            _messageBus.Unsubscribe<ResetMessage>(OnReset);
+        }
+
+        private void OnReset(ResetMessage _)
+        {
+            _enemies.Clear();
+            _spawnCooldown = 0f;
+            _frequency = 1f;
         }
 
         private void OnObjectDestroyed(ObjectDestroyedMessage message)

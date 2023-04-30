@@ -46,6 +46,7 @@ namespace Assets.Scripts.Controllers
             sequence.AppendCallback(Reset);
             sequence.AppendInterval(1f);
             sequence.Append(_gameOverFill.transform.DOLocalMoveY(0.5f, 0.2f).SetEase(Ease.InOutCubic));
+            sequence.AppendCallback(OnPlay);
             sequence.AppendCallback(() => _gameOverFill.transform.localPosition = new Vector3(_gameOverFill.transform.localPosition.x, -1.5f, _gameOverFill.transform.localPosition.z));
 
             sequence.Play();
@@ -55,6 +56,11 @@ namespace Assets.Scripts.Controllers
         private void Reset()
         {
             _messageBus.Publish(new ResetMessage()).Forget();
+        }
+
+        private void OnPlay()
+        {
+            _messageBus.Publish(new OnPlayMessage()).Forget();
         }
     }
 }

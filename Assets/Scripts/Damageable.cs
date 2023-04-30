@@ -19,6 +19,11 @@ namespace Assets.Scripts
         [SerializeField]
         private float _health = 2f;
 
+        private float _currentHealth;
+
+        public float MaxHealth => _health;
+        public float Health => _health;
+
         [SerializeField]
         private LayerMask _collisionLayerMask;
 
@@ -30,6 +35,20 @@ namespace Assets.Scripts
         [Inject] private Instantiator _instantiator;
         [Inject] private ObjectLocator _objectLocator;
 
+        private void Start()
+        {
+            Reset();
+            _messageBus.Subscribe<ResetMessage>(OnReset);
+        }
+
+        private void OnReset(ResetMessage _) => Reset();
+        
+        public void Reset()
+        {
+            IsDead = false;
+            _currentHealth = _health;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (IsDead)
@@ -38,10 +57,10 @@ namespace Assets.Scripts
             if (!_collisionLayerMask.HasLayer(other.gameObject.layer))
                 return;
 
-            _messageBus.Publish(new DamageAffectedMessage(_isPlayer, other.transform));
+            _messageBus.Publish(new DamageAffectedMessage(_isPlayer, other.transform, this));
 
-            _health--;
-            if (_health <= 0)
+            _currentHealth--;
+            if (_currentHealth <= 0)
             {
                 IsDead = true;
                 if (_animateDeath)

@@ -23,12 +23,20 @@ namespace Assets.Scripts.Controllers
         {
             _messageBus.Subscribe<LevelShouldChangeMessage>(OnLevelShouldChange);
             _messageBus.Subscribe<TotalScoreChangedMessage>(OnScoreChanged);
+            _messageBus.Subscribe<ResetMessage>(OnReset);
         }
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<LevelShouldChangeMessage>(OnLevelShouldChange);
             _messageBus.Unsubscribe<TotalScoreChangedMessage>(OnScoreChanged);
+            _messageBus.Unsubscribe<ResetMessage>(OnReset);
+        }
+
+        private void OnReset(ResetMessage _)
+        {
+            _requiredScore = 30;
+            _fillTransform.localScale = GetScaleValue(0f);
         }
 
         private void OnLevelShouldChange(LevelShouldChangeMessage message)

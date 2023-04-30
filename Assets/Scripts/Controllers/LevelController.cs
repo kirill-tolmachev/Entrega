@@ -25,12 +25,22 @@ namespace Assets.Scripts.Controllers
         {
             _messageBus.Subscribe<LocalScoreChangedMessage>(OnScoreChanged);
             _messageBus.Subscribe<StartupMessage>(OnStartup);
+            _messageBus.Subscribe<ResetMessage>(OnReset);
         }
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<LocalScoreChangedMessage>(OnScoreChanged);
             _messageBus.Unsubscribe<StartupMessage>(OnStartup);
+            _messageBus.Unsubscribe<ResetMessage>(OnReset);
+        }
+
+        private void OnReset(ResetMessage obj)
+        {
+            _currentLevel = 0;
+            _totalScore = 0;
+            _localScore = 0;
+            _requiredScore = 30;
         }
 
         private void OnStartup(StartupMessage message)
@@ -51,7 +61,7 @@ namespace Assets.Scripts.Controllers
             }
 
             _localScore = 0;
-            _requiredScore *= 2;
+            _requiredScore = Mathf.Min(_requiredScore + 10, 60);
             _currentLevel++;
             var levelInfo = _settings.GetInfo(_currentLevel);
 
