@@ -56,7 +56,7 @@ namespace Assets.Scripts
         private void OnPlayerHealRequest(PlayerHealRequestMessage obj)
         {
             var delta = obj.Value;
-            _currentHealth += delta;
+            _currentHealth = Mathf.Clamp(_currentHealth + delta, 0f, MaxHealth);
 
             _messageBus.Publish(new PlayerHealedMessage(this)).Forget();
         }
