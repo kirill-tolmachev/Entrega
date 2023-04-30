@@ -23,14 +23,20 @@ namespace Assets.Scripts.Controllers
         private void OnEnable()
         {
             _messageBus.Subscribe<DamageAffectedMessage>(OnDamageAffected);
+            _messageBus.Subscribe<PlayerHealedMessage>(OnPlayerHealed);
             _messageBus.Subscribe<ResetMessage>(OnReset);
         }
-
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<DamageAffectedMessage>(OnDamageAffected);
+            _messageBus.Unsubscribe<PlayerHealedMessage>(OnPlayerHealed);
             _messageBus.Unsubscribe<ResetMessage>(OnReset);
+        }
+
+        private void OnPlayerHealed(PlayerHealedMessage obj)
+        {
+            UpdateBar(obj.Player);
         }
 
         private void OnDamageAffected(DamageAffectedMessage obj)
@@ -39,8 +45,12 @@ namespace Assets.Scripts.Controllers
                 return;
 
             var player = obj.Target;
-            float scale = ChangeNorm(1f - player.Health / player.MaxHealth, _minScale, _maxScale);
+            UpdateBar(player);
+        }
 
+        private void UpdateBar(Damageable player)
+        {
+            float scale = ChangeNorm(1f - player.Health / player.MaxHealth, _minScale, _maxScale);
             _spriteRenderer.transform.localScale = new Vector3(scale, scale, scale);
         }
 

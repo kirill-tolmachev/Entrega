@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.MessageImpl;
 using Assets.Scripts.Util;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Scripts;
 using Scripts.Infrastructure.Messages;
@@ -39,6 +40,9 @@ namespace Assets.Scripts
         {
             Reset();
             _messageBus.Subscribe<ResetMessage>(OnReset);
+
+            if (_isPlayer)
+                _messageBus.Subscribe<PlayerHealRequestMessage>(OnPlayerHealRequest);
         }
 
         private void OnReset(ResetMessage _) => Reset();
@@ -47,6 +51,14 @@ namespace Assets.Scripts
         {
             IsDead = false;
             _currentHealth = _health;
+        }
+
+        private void OnPlayerHealRequest(PlayerHealRequestMessage obj)
+        {
+            var delta = obj.Value;
+            _currentHealth += delta;
+
+            _messageBus.Publish(new PlayerHealedMessage(this)).Forget();
         }
 
         private void OnTriggerEnter2D(Collider2D other)

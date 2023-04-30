@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.MessageImpl;
 using Cinemachine;
+using DG.Tweening;
 using Scripts.Infrastructure.Messages;
 using UnityEngine;
 using Zenject;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Controllers
         [SerializeField] private float _rotationSpeed;
 
         private float _targetRotation;
+        private bool _isFrozen;
 
         private float Rotation
         {
@@ -30,11 +32,15 @@ namespace Assets.Scripts.Controllers
         private void OnEnable()
         {
             _messageBus.Subscribe<ResetMessage>(OnReset);
+            _messageBus.Subscribe<CreditsStarted>(OnCreditsStarted);
+            _messageBus.Subscribe<CreditsEnded>(OnCreditsEnded);
         }
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<ResetMessage>(OnReset);
+            _messageBus.Unsubscribe<CreditsStarted>(OnCreditsStarted);
+            _messageBus.Unsubscribe<CreditsEnded>(OnCreditsEnded);
         }
 
         private void OnReset(ResetMessage _)
@@ -45,6 +51,9 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
+            if (_isFrozen)
+                return;
+
             if (Mathf.Abs(Rotation - _targetRotation) < 0.01)
             {
                 _targetRotation = Random.value * 360f - 180f;
@@ -53,5 +62,15 @@ namespace Assets.Scripts.Controllers
             Rotation = Mathf.Lerp(Rotation, _targetRotation, _rotationSpeed * Time.deltaTime);
         }
 
+        private void OnCreditsStarted(CreditsStarted obj)
+        {
+            DOTween.To(() => Rotation, x => Rotation = x, 0f, 0.1f).SetUpdate(true);
+            _isFrozen = true;
+        }
+
+        private void OnCreditsEnded(CreditsEnded obj)
+        {
+            _isFrozen = false;
+        }
     }
 }

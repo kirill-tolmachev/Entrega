@@ -24,11 +24,14 @@ namespace Assets.Scripts.Controllers
         private void OnEnable()
         {
             _messageBus.Subscribe<DeathMessage>(OnDeath);
+            _messageBus.Subscribe<CreditsEnded>(OnCreditsEnded);
         }
+
 
         private void OnDisable()
         {
             _messageBus.Unsubscribe<DeathMessage>(OnDeath);
+            _messageBus.Unsubscribe<CreditsEnded>(OnCreditsEnded);
         }
 
         private void OnDeath(DeathMessage message)
@@ -48,9 +51,13 @@ namespace Assets.Scripts.Controllers
             sequence.Append(_gameOverFill.transform.DOLocalMoveY(0.5f, 0.2f).SetEase(Ease.InOutCubic));
             sequence.AppendCallback(OnPlay);
             sequence.AppendCallback(() => _gameOverFill.transform.localPosition = new Vector3(_gameOverFill.transform.localPosition.x, -1.5f, _gameOverFill.transform.localPosition.z));
-
             sequence.Play();
+        }
 
+        private void OnCreditsEnded(CreditsEnded _)
+        {
+            Reset();
+            OnPlay();
         }
 
         private void Reset()
