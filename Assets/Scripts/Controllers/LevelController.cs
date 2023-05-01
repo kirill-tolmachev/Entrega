@@ -66,7 +66,7 @@ namespace Assets.Scripts.Controllers
             var levelInfo = _settings.GetInfo(_currentLevel);
 
             _messageBus.Publish(new TotalScoreChangedMessage(_localScore, _totalScore)).Forget();
-            _messageBus.Publish(new LevelShouldChangeMessage(_currentLevel, levelInfo, _requiredScore, _currentLevel)).Forget();
+            _messageBus.Publish(new LevelShouldChangeMessage(_currentLevel, levelInfo, _requiredScore, _currentLevel + 2)).Forget();
         }
 
 

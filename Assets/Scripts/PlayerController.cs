@@ -1,4 +1,5 @@
 using System.Linq;
+using Assets.Scripts.MessageImpl;
 using Cysharp.Threading.Tasks;
 using Scripts.Infrastructure.Messages;
 using Scripts.MessageImpl;
@@ -54,6 +55,7 @@ namespace Scripts
             var playerPosition = _objectLocator.PlayerTransform.position;
             var direction = -Mathf.Sign(_objectLocator.PlayerTransform.position.x);
 
+            _messageBus.Publish(new InvokeDamageMessage(true, 1));
             _messageBus.Publish(new ShootMessage(true, playerPosition, direction)).Forget();
         }
     }

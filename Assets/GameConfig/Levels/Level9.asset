@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455b6c2ee8730704e96173daccd829d2, type: 3}
+  m_Name: Level9
+  m_EditorClassIdentifier: 
+  CameraBackgroundColor: {r: 1, g: 0.9019608, b: 0.5019608, a: 1}
+  BackgroundColor: {r: 0.9843137, g: 0.5882353, b: 0.28627452, a: 1}
+  FillColor: {r: 0.14901961, g: 0.42352942, b: 0.8666667, a: 1}
+  TargetColor: {r: 0.3254902, g: 0.7607843, b: 0.57254905, a: 1}
+  TextColor: {r: 0.3764706, g: 0.36078432, b: 0.72156864, a: 1}
+  PlayerColor: {r: 0.9019608, g: 0.27450982, b: 0.2509804, a: 1}

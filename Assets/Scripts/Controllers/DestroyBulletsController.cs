@@ -29,7 +29,7 @@ namespace Assets.Scripts.Controllers
 
         private void OnDamageAffected(DamageAffectedMessage obj)
         {
-            if (obj.Affector.TryGetComponent(out Bullet bullet))
+            if (obj.Affector != null && obj.Affector.TryGetComponent(out Bullet bullet))
                 _bullets.Add(bullet);
         }
 

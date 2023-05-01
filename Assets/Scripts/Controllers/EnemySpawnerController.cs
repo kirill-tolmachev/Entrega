@@ -69,7 +69,7 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            float cooldown = Mathf.Max(0.2f,10f / _frequency);
+            float cooldown = Mathf.Max(0.1f,10f / _frequency);
             _spawnCooldown += Time.deltaTime;
 
             if (_spawnCooldown < cooldown)
@@ -97,20 +97,25 @@ namespace Assets.Scripts.Controllers
 
         private float GetPositionX(int slot)
         {
-            if (slot is < 0 or >= 5)
+            if (slot is < 0 or >= 4)
             {
                 throw new ArgumentOutOfRangeException(nameof(slot));
             }
 
-            float baseValue = -3f;
-            float increment = 1.5f;
-
-            return baseValue + (slot * increment);
+            var positions = new[]
+            {
+                -3f,
+                -1.5f,
+                1.5f,
+                3f
+            };
+            
+            return positions[slot];
         }
 
         private int? GetFreeSlot()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 if (_enemies.Any(x => x.Value.Slot == i))
                     continue;

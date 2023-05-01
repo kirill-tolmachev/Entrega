@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f017f1d31fdbcb84f947a50c45465cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deleteOnReset: 1
 --- !u!95 &3855917584411368621
 Animator:
   serializedVersion: 5
@@ -257,6 +258,7 @@ MonoBehaviour:
   _minDeviation: -20
   _maxDeviation: 20
   _target: {fileID: 3174323715703644873}
+  _rotateOnUpdate: 0
 --- !u!114 &8702326681978088625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,5 +284,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e040b0602351d2b43a5968aa58372667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _paletteColor: 4
+  _paletteColor: 5
   _text: {fileID: 8839103893823880077}

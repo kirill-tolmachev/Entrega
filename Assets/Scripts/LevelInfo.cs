@@ -16,6 +16,8 @@ namespace Assets.Scripts
         public Color TargetColor;
         public Color TextColor;
         public Color PlayerColor;
+        
+        public float EnemyFrequency;
 
         public Color GetColor(PaletteColor paletteColor)
         {

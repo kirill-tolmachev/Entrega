@@ -40,7 +40,10 @@ namespace Scripts
             transform.DOScale(new Vector3(scale.x, 0f, scale.z), _shrinkDuration).SetEase(Ease.InOutBounce);
 
             if (packageCollision)
+            {
                 _messageBus.Publish(new PackageDeliveredMessage(package, this)).Forget();
+                _messageBus.Publish(new PlayerHealRequestMessage(5)).Forget();
+            }
 
             if (playerCollision)
                 _messageBus.Publish(new PlayerTargetCollisionMessage(this)).Forget();

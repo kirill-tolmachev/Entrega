@@ -51,7 +51,7 @@ namespace Assets.Scripts.Controllers
         private void OnLevelShouldChange(LevelShouldChangeMessage obj)
         {
             var level = obj.LevelIndex;
-            float targetSpeed = Mathf.Clamp(level * 2f, _minSpeed, _maxSpeed);
+            float targetSpeed = Mathf.Clamp((level + 1) * 2.5f, _minSpeed, _maxSpeed);
 
             if (_tween != null)
             {

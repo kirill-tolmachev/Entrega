@@ -31,6 +31,11 @@ namespace Assets.Scripts
         [Inject]
         private IMessageBus _messageBus;
 
+        public void Init(float maxHealth)
+        {
+            _currentHealth = _health = maxHealth;
+        }
+
         [SerializeField] private ParticleSystem _onDestroyParticleSystem;
 
         [Inject] private Instantiator _instantiator;
@@ -43,6 +48,14 @@ namespace Assets.Scripts
 
             if (_isPlayer)
                 _messageBus.Subscribe<PlayerHealRequestMessage>(OnPlayerHealRequest);
+            
+            _messageBus.Subscribe<InvokeDamageMessage>(OnInvokeDamage);
+        }
+
+        private void OnInvokeDamage(InvokeDamageMessage obj)
+        {
+            if (obj.ToPlayer == _isPlayer)
+                DoDamage(obj.Value, null);
         }
 
         private void OnReset(ResetMessage _) => Reset();
@@ -69,9 +82,14 @@ namespace Assets.Scripts
             if (!_collisionLayerMask.HasLayer(other.gameObject.layer))
                 return;
 
-            _messageBus.Publish(new DamageAffectedMessage(_isPlayer, other.transform, this));
+            DoDamage(1, other.transform);
+        }
 
-            _currentHealth--;
+        private void DoDamage(int value, Transform author)
+        {
+            _messageBus.Publish(new DamageAffectedMessage(_isPlayer, author, this));
+
+            _currentHealth -= value;
             if (_currentHealth <= 0)
             {
                 IsDead = true;

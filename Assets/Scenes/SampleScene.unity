@@ -881,8 +881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62937a12e4fc434d8042e596159c668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpeed: 4
-  _maxSpeed: 25
+  _minSpeed: 8
+  _maxSpeed: 40
 --- !u!1 &283636195
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +941,7 @@ MonoBehaviour:
     OrthographicSize: 10.39
     NearClipPlane: 0
     FarClipPlane: 5000.33
-    Dutch: -3.921837
+    Dutch: 79.16221
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
@@ -1000,6 +1000,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 889c96b064bd18c41a8eb2497fae56db, type: 2}
+--- !u!1 &302646493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 302646494}
+  m_Layer: 0
+  m_Name: Pickables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &302646494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302646493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -23.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624463066}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303735141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1438,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: -0, y: -0, z: -0.03421781, w: 0.9994144}
+  m_LocalRotation: {x: -0, y: -0, z: 0.63716984, w: 0.7707234}
   m_LocalPosition: {x: -4.5, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3376,6 +3407,7 @@ Transform:
   - {fileID: 1833483636}
   - {fileID: 1837795096}
   - {fileID: 1115818181}
+  - {fileID: 1738231110}
   m_Father: {fileID: 1624463066}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3516,6 +3548,7 @@ Transform:
   - {fileID: 194082196}
   - {fileID: 1111519582}
   - {fileID: 727250187}
+  - {fileID: 302646494}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3563,6 +3596,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcd8cedd7876ed42a773958cbe720c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1738231109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1738231110}
+  - component: {fileID: 1738231111}
+  m_Layer: 0
+  m_Name: PIckableSpawnerController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1738231110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738231109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1541994685}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738231111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738231109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca53c3e0691481d47bdba3a9a4984d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minInterval: 3
+  _maxInterval: 8
+  _prefabs:
+  - {fileID: 3034891360196827555, guid: c69e05eef950d764698a2514ed172030, type: 3}
+  - {fileID: -4552777578059996230, guid: 4a1246b4dbd59c544a0edbedcdc2d33e, type: 3}
+  - {fileID: 8062802624466138336, guid: 344258880d21a5145ada251fe22ef089, type: 3}
+  _position: {fileID: 302646494}
+  _parent: {fileID: 302646494}
 --- !u!1 &1796375700
 GameObject:
   m_ObjectHideFlags: 0

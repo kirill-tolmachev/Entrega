@@ -146,6 +146,8 @@ namespace Assets.Scripts
             }
 
             Add<EnemyBehaviourApproaching, EnemyBehaviourAttacking>();
+            Add<EnemyBehaviourApproaching, EnemyBehaviourHeadingForward>();
+            Add<EnemyBehaviourApproaching, EnemyBehaviourHeadingBack>();
             
             Add<EnemyBehaviourAttacking, EnemyBehaviourHeadingForward>();
             Add<EnemyBehaviourAttacking, EnemyBehaviourHeadingBack>();
@@ -168,7 +170,14 @@ namespace Assets.Scripts
         {
             _enemy = enemy;
 
-            var beh = _container.Resolve<EnemyBehaviourApproaching>();
+            var behaviour = new[]
+            {
+                typeof(EnemyBehaviourHeadingForward),
+                typeof(EnemyBehaviourHeadingBack),
+                typeof(EnemyBehaviourApproaching),
+            }.PickRandom();
+
+            var beh = (EnemyBehaviour)_container.Resolve(behaviour);
             beh.Init(_enemy, this);
 
             Behaviour = beh;

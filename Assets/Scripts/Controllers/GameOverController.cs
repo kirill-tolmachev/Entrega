@@ -21,6 +21,8 @@ namespace Assets.Scripts.Controllers
 
         [Inject] private IMessageBus _messageBus;
 
+        [SerializeField] private AudioSource _audioSource;
+
         private void OnEnable()
         {
             _messageBus.Subscribe<DeathMessage>(OnDeath);
@@ -62,6 +64,7 @@ namespace Assets.Scripts.Controllers
 
         private void Reset()
         {
+            _audioSource.Play();
             _messageBus.Publish(new ResetMessage()).Forget();
         }
 

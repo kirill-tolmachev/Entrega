@@ -30,6 +30,9 @@ namespace Assets.Scripts.Controllers
 
         private void OnDamageAffected(DamageAffectedMessage message)
         {
+            if (message.Affector == null)
+                return;
+
             var position = message.Affector.position;
             _instantiator.InstantiatePrefabWorldSpace(_damageParticleSystem, position, Quaternion.identity, _fxsParent);
         }
