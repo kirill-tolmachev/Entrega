@@ -10,6 +10,8 @@ namespace Scripts
 {
     public class PlayerController : MonoBehaviour
     {
+        public static bool InputLocked;
+
         private readonly KeyCode[] _jumpKeys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
 
         private bool _grounded = true;
@@ -21,10 +23,18 @@ namespace Scripts
         [Inject] private IMessageBus _messageBus;
 
         [Inject] private ObjectLocator _objectLocator;
+
+        private void OnEnable()
+        {
+            _messageBus.Subscribe<CreditsStarted>(_ => InputLocked = true);
+            _messageBus.Subscribe<CreditsEnded>(_ => InputLocked = false);
+        }
         
         // Update is called once per frame
         void Update()
         {
+            if (InputLocked) return;
+
             if (_grounded && (_jumpKeys.Any(Input.GetKeyDown)))
             {
                 Jump();
